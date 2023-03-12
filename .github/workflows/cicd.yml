@@ -1,0 +1,50 @@
+name: CI
+
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - master
+  push:
+    branches-ignore:
+      - dev
+      - master
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
+    - name: Megalint
+      run: npm run megalint
+    - name: Unit tests
+      run: npm run unit-tests
+    - name: Integration tests
+      run: npm run integration-tests
+    - name: Performance tests
+      run: npm run performance-tests
+    - name: Check test results
+      run: |
+        if [ ${{ job.status }} -ne 0 ]; then
+          exit 1
+        fi
+
+  megalint:
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/master'
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
+    - name: Megalint
+      run: npm run megalint
+    - name: Check test results
+      run: |
+        if [ ${{ job.status }} -ne 0 ]; then
+          exit 1
+        fi
