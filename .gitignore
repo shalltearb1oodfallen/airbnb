@@ -133,3 +133,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# formats
+*.pdf
+*.jpg
+*.gif
+*.png
+*.zip
+*.csv
