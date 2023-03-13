@@ -11,7 +11,7 @@ filename=data
 url=$1
 
 # Download the file
-wget -O $filename.zip $url
+wget -O $filename.zip "$url"
 
 # Unzip the file to the directory outside of the container
 unzip $filename.zip -d /data
