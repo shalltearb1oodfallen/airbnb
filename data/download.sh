@@ -2,8 +2,8 @@
 
 # Check if the filename is provided as argument
 if [ $# -eq 0 ]; then
-    echo "Please provide the url as an argument."
-    exit 1
+	echo "Please provide the url as an argument."
+	exit 1
 fi
 
 # Set the filename and download URL
