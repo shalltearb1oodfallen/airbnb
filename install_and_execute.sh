@@ -4,10 +4,10 @@
 cd data || exit
 
 # build docker image
-sudo docker build -t gender_data:latest -f download_data .
+sudo docker build -t airbnb:latest -f download_data .
 
 # run docker image and download data
-sudo docker run --name worldbank_gender_data -v "$(pwd)":/data gender_data https://databank.worldbank.org/data/download/Gender_Stats_CSV.zip
+sudo docker run --name airbnb_data_load -v "$(pwd)":/data airbnb https://storage.googleapis.com/airbnb_data_2022/airbnb.zip
 
 # delete container and image
-sudo docker rm worldbank_gender_data && sudo docker image rm gender_data
+#sudo docker rm airbnb_data_load && sudo docker image rm airbnb
