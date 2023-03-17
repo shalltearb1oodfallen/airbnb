@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-12-29/data/listings.csv.gz -O dec_antwerp_listing.csv.gz
 wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-12-29/visualisations/listings.csv -O dec_antwerp.csv
