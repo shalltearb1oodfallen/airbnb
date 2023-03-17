@@ -1,43 +1,37 @@
 #!/bin/sh
 
-wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-12-29/data/listings.csv.gz -O dec_antwerp_listing.csv.gz
-wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-12-29/visualisations/listings.csv -O dec_antwerp.csv
-wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-09-22/data/listings.csv.gz -O sep_antwerp_listing.csv.gz
-wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-09-22/visualisations/listings.csv -O sep_antwerp.csv
-wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-06-22/data/listings.csv.gz -O jun_antwerp_listing.csv.gz
-wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-06-22/visualisations/listings.csv -O jun_antwerp.csv
-wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-03-28/data/listings.csv.gz -O mar_antwerp_listing.csv.gz
-wget http://data.insideairbnb.com/belgium/vlg/antwerp/2022-03-28/visualisations/listings.csv -O mar_antwerp.csv
-
-
-
-wget http://data.insideairbnb.com/greece/attica/athens/2022-12-27/data/listings.csv.gz -O dec_athens_listing.csv.gz
-wget http://data.insideairbnb.com/greece/attica/athens/2022-09-20/data/listings.csv.gz -O sep_athens_listing.csv.gz
-wget http://data.insideairbnb.com/greece/attica/athens/2022-06-17/data/listings.csv.gz -O jun_athens_listing.csv.gz
-wget http://data.insideairbnb.com/greece/attica/athens/2022-03-24/data/listings.csv.gz -O mar_athens_listing.csv.gz
-wget http://data.insideairbnb.com/greece/attica/athens/2022-12-27/visualisations/listings.csv -O dec_athens.csv
-wget http://data.insideairbnb.com/greece/attica/athens/2022-09-20/visualisations/listings.csv -O sep_athens.csv
-wget http://data.insideairbnb.com/greece/attica/athens/2022-06-17/visualisations/listings.csv -O jun_athens.csv
-wget http://data.insideairbnb.com/greece/attica/athens/2022-03-24/visualisations/listings.csv -O mar_athens.csv
-
-wget http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-12-28/data/listings.csv.gz -O dec_bangkok_listings.csv.gz
-wget http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-09-21/data/listings.csv.gz -O sep_bangkok_listings.csv.gz
-wget http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-06-20/data/listings.csv.gz -O jun_bangkok_listings.csv.gz
-wget http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-03-25/data/listings.csv.gz -O mar_bangkok_listings.csv.gz
-wget http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-12-28/visualisations/listings.csv -O dec_bangkok.csv
-wget http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-09-21/visualisations/listings.csv -O sep_bangkok.csv
-wget http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-06-20/visualisations/listings.csv -O jun_bangkok.csv
-wget http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-03-25/visualisations/listings.csv -O mar_bangkok.csv
-
-
-wget http://data.insideairbnb.com/spain/catalonia/barcelona/2022-12-11/data/listings.csv.gz -O dec_barcelona_listings.csv.gz
-wget http://data.insideairbnb.com/spain/catalonia/barcelona/2022-09-10/data/listings.csv.gz -O sep_barcelona_listings.csv.gz
-wget http://data.insideairbnb.com/spain/catalonia/barcelona/2022-06-07/data/listings.csv.gz -O jun_barcelona_listings.csv.gz
-wget http://data.insideairbnb.com/spain/catalonia/barcelona/2022-03-10/data/listings.csv.gz -O mar_barcelona_listings.csv.gz
-wget http://data.insideairbnb.com/spain/catalonia/barcelona/2022-12-11/visualisations/listings.csv -O dec_barcelona.csv
-wget http://data.insideairbnb.com/spain/catalonia/barcelona/2022-09-10/visualisations/listings.csv -O sep_barcelona.csv
-wget http://data.insideairbnb.com/spain/catalonia/barcelona/2022-06-07/visualisations/listings.csv -O jun_barcelona.csv
-wget http://data.insideairbnb.com/spain/catalonia/barcelona/2022-03-10/visualisations/listings.csv -O mar_barcelona.csv
+wget "http://data.insideairbnb.com/belgium/vlg/antwerp/2022-12-29/data/listings.csv.gz" -O "dec_antwerp_listing.csv.gz"
+wget "http://data.insideairbnb.com/belgium/vlg/antwerp/2022-12-29/visualisations/listings.csv" -O "dec_antwerp.csv"
+wget "http://data.insideairbnb.com/belgium/vlg/antwerp/2022-09-22/data/listings.csv.gz" -O "sep_antwerp_listing.csv.gz"
+wget "http://data.insideairbnb.com/belgium/vlg/antwerp/2022-09-22/visualisations/listings.csv" -O "sep_antwerp.csv"
+wget "http://data.insideairbnb.com/belgium/vlg/antwerp/2022-06-22/data/listings.csv.gz" -O "jun_antwerp_listing.csv.gz"
+wget "http://data.insideairbnb.com/belgium/vlg/antwerp/2022-06-22/visualisations/listings.csv" -O "jun_antwerp.csv"
+wget "http://data.insideairbnb.com/belgium/vlg/antwerp/2022-03-28/data/listings.csv.gz" -O "mar_antwerp_listing.csv.gz"
+wget "http://data.insideairbnb.com/belgium/vlg/antwerp/2022-03-28/visualisations/listings.csv" -O "mar_antwerp.csv"
+wget "http://data.insideairbnb.com/greece/attica/athens/2022-12-27/data/listings.csv.gz" -O "dec_athens_listing.csv.gz"
+wget "http://data.insideairbnb.com/greece/attica/athens/2022-09-20/data/listings.csv.gz" -O "sep_athens_listing.csv.gz"
+wget "http://data.insideairbnb.com/greece/attica/athens/2022-06-17/data/listings.csv.gz" -O "jun_athens_listing.csv.gz"
+wget "http://data.insideairbnb.com/greece/attica/athens/2022-03-24/data/listings.csv.gz" -O "mar_athens_listing.csv.gz"
+wget "http://data.insideairbnb.com/greece/attica/athens/2022-12-27/visualisations/listings.csv" -O "dec_athens.csv"
+wget "http://data.insideairbnb.com/greece/attica/athens/2022-09-20/visualisations/listings.csv" -O "sep_athens.csv"
+wget "http://data.insideairbnb.com/greece/attica/athens/2022-06-17/visualisations/listings.csv" -O "jun_athens.csv"
+wget "http://data.insideairbnb.com/greece/attica/athens/2022-03-24/visualisations/listings.csv" -O "mar_athens.csv"
+wget "http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-12-28/data/listings.csv.gz" -O "dec_bangkok_listings.csv.gz"
+wget "http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-09-21/data/listings.csv.gz" -O "sep_bangkok_listings.csv.gz"
+wget "http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-06-20/data/listings.csv.gz" -O "jun_bangkok_listings.csv.gz"
+wget "http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-03-25/data/listings.csv.gz" -O "mar_bangkok_listings.csv.gz"
+wget "http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-12-28/visualisations/listings.csv" -O "dec_bangkok.csv"
+wget "http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-09-21/visualisations/listings.csv" -O "sep_bangkok.csv"
+wget "http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-06-20/visualisations/listings.csv" -O "jun_bangkok.csv"
+wget "http://data.insideairbnb.com/thailand/central-thailand/bangkok/2022-03-25/visualisations/listings.csv" -O "mar_bangkok.csv"
+wget "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-12-11/data/listings.csv.gz" -O "dec_barcelona_listings.csv.gz"
+wget "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-09-10/data/listings.csv.gz" -O "sep_barcelona_listings.csv.gz"
+wget "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-06-07/data/listings.csv.gz" -O "jun_barcelona_listings.csv.gz"
+wget "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-03-10/data/listings.csv.gz" -O "mar_barcelona_listings.csv.gz"
+wget "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-12-11/visualisations/listings.csv" -O "dec_barcelona.csv"
+wget "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-09-10/visualisations/listings.csv" -O "sep_barcelona.csv"
+wget "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-06-07/visualisations/listings.csv" -O "jun_barcelona.csv"
+wget "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-03-10/visualisations/listings.csv" -O "mar_barcelona.csv"
 
 
 wget http://data.insideairbnb.com/china/beijing/beijing/2022-12-29/data/listings.csv.gz -O dec_beijing_listings.csv.gz
