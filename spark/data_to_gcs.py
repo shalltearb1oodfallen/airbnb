@@ -29,7 +29,11 @@ spark._jsc.hadoopConfiguration().set("google.cloud.auth.service.account.json.key
 
 # Define bucket names
 source_bucket = "airbnb_data_2022"
-target_bucket = "zoomcamp_us"
+buckets = client.list_buckets()
+for bucket in buckets:
+    if "project_airbnb" in bucket.name:
+        target_bucket = bucket.name
+
 
 backfill = 'yes'
 backfill_list = ['mar', 'jun', 'sep', 'dec']
