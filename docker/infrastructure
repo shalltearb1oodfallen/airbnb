@@ -6,4 +6,4 @@ WORKDIR /app
 
 ENV PATH="/usr/bin:${PATH}"
 
-CMD ["/bin/sh", "-c", "terraform init && terraform apply -var 'key=key.json' -auto-approve"]
+CMD ["/bin/sh", "-c", "terraform init && terraform apply -var 'key=key.json' -var 'project=project_id.txt' -auto-approve"]

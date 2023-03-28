@@ -1,10 +1,14 @@
-
 variable "key" {
   type = string
 }
+
+variable "project" {
+  type = string
+}
+
 provider "google" {
   credentials = file(var.key)
-  project     = "seismic-aloe-375119"
+  project     = file("${path.module}/${var.project}")
   region      = "europe-west1"
 }
 
