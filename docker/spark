@@ -1,0 +1,17 @@
+FROM jupyter/pyspark-notebook:latest
+
+USER root
+RUN apt-get update && \
+    # Install the GCS connector and Hadoop dependencies
+    wget https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-hadoop2-latest.jar -P /usr/local/spark/jars/ && \
+    wget https://downloads.apache.org/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz && \
+    tar -xzf hadoop-3.3.1.tar.gz && \
+    cp hadoop-3.3.1/share/hadoop/tools/lib/*.jar /usr/local/spark/jars/ && \
+    rm -rf hadoop-3.3.1.tar.gz hadoop-3.3.1
+USER $NB_UID
+
+# Install the GCS Python library
+RUN pip3 install google-cloud-storage pyspark
+
+# Expose port 8888 for Jupyter Notebook
+EXPOSE 8888
