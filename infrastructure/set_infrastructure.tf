@@ -23,8 +23,8 @@ resource "google_storage_bucket" "project_airbnb" {
 }
 
 resource "google_bigquery_dataset" "project_airbnb" {
-  dataset_id                  = "project_airbnb"
-  friendly_name               = "Project Airbnb"
-  description                 = "Dataset for Project Airbnb"
-  location                    = "EU"
+  dataset_id    = "project_airbnb"
+  friendly_name = "Project Airbnb"
+  description   = "Dataset for Project Airbnb"
+  location      = "EU"
 }
