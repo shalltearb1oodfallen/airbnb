@@ -45,17 +45,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
           DISABLE: 
-            - COPYPASTE
-            - SPELL
-            - REPOSITORY
-            - MAKEFILE_CHECKMAKE
-            - PYTHON_PYRIGHT
-            - PYTHON_PYLINT
-            - TERRAFORM_KICS
-            - TERRAFORM_CHECKOV
-            - TERRAFORM_TERRASCAN
-            - SQL_SQL_LINT
-            - SQL_TSQLLINT # Uncomment to disable copy-paste and spell checks
+            name: COPYPASTE
+            name: SPELL
+            name: REPOSITORY
+            name: MAKEFILE_CHECKMAKE
+            name: PYTHON_PYRIGHT
+            name: PYTHON_PYLINT
+            name: TERRAFORM_KICS
+            name: TERRAFORM_CHECKOV
+            name: TERRAFORM_TERRASCAN
+            name: SQL_SQL_LINT
+            name: SQL_TSQLLINT # Uncomment to disable copy-paste and spell checks
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
