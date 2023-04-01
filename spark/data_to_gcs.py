@@ -1,6 +1,7 @@
 from google.cloud import storage
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
+from pyspark.sql.functions import col
     
 # Create a client to access the GCS bucket
 client = storage.Client.from_service_account_json("key.json")
@@ -104,6 +105,12 @@ if backfill == "yes":
                 for c, t in non_listing_df.dtypes
             ]
         )
+
+        if "source" in listing_df.columns:
+            listing_df = listing_df.drop(col("source"))
+
+        if "source" in non_listing_df.columns:
+            non_listing_df = non_listing_df.drop(col("source"))
 
         # Write the listing dataframe to the target bucket
         destination_path = f"gs://{target_bucket}/files/listings/{i}"

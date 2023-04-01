@@ -5,5 +5,4 @@ RUN pip install google-cloud-storage google-cloud-bigquery
 
 WORKDIR /app  
 
-# Set up interactive mode
 CMD ["python", "tables_on_bigquery.py"]

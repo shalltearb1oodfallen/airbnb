@@ -4,7 +4,6 @@ create table if not exists project_airbnb.raw_listings_long
     , listing_url                                   string
     , scrape_id                                     string
     , last_scraped                                  string
-    , source                                        string
     , name                                          string
     , description                                   string
     , neighborhood_overview                         string

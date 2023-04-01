@@ -14,11 +14,12 @@ infrastructure:
 	# build spark container
 	sudo docker build -t spark -f docker/spark .
 
+	# build raw tables container
+	sudo docker build -t raw_tables -f docker/raw_tables .
+
 	# build ingestion container
-	sudo docker build -t ingestion -f docker/gcs_2_bq .
+	sudo docker build -t ingestion -f docker/ingestion .
 
 	# create table on Big Query
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./gcs_project.txt:/app/gcs_project.txt -v ./ingestion/raw_listings_long.sql:/app/raw_listings_long.sql -v ./ingestion/raw_listings.sql:/app/raw_listings.sql -v ./ingestion/tables_on_bigquery.py:/app/tables_on_bigquery.py ingestion
-
+	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./gcs_project.txt:/app/gcs_project.txt -v ./infrastructure/raw_listings_long.sql:/app/raw_listings_long.sql -v ./infrastructure/raw_listings.sql:/app/raw_listings.sql -v ./infrastructure/tables_on_bigquery.py:/app/tables_on_bigquery.py raw_tables
 	
-

@@ -1,39 +1,55 @@
 from google.cloud import bigquery
 from google.cloud import storage
+import sys
 
-# Construct a BigQuery client object.
-client = bigquery.Client.from_service_account_json('./key.json')
+with open('./project_id.txt', 'r') as f:
+    id = f.read()
 
-# Set the destination table.
-table_id = 'seismic-aloe-375119.project_airbnb.raw_listings_long'
+bq_table = sys.argv[1]
 
-# Construct a BigQuery job configuration object.
-job_config = bigquery.LoadJobConfig(
-    skip_leading_rows=1,
-    # The source format defaults to CSV, so the line below is optional.
-    source_format=bigquery.SourceFormat.CSV,
-    field_delimiter=',',
-    quote_character='"',
-    allow_quoted_newlines=True,
-    encoding='UTF-8',
-    max_bad_records=0,
-    write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
-    ignore_unknown_values=True
-)
+quarter = sys.argv[2]
 
-# Construct a Cloud Storage client object.
-storage_client = storage.Client.from_service_account_json('./key.json')
+if bq_table == 'raw_listings_long':
+    path = 'listings'
+else:
+    path = 'non_listings'
 
-# Set the Cloud Storage bucket and directory.
-bucket_name = 'project_airbnb_47eedf56'
-directory_name = 'files/listings/dec/'
+table = id + ".project_airbnb." + bq_table
 
-# List all the files in the directory.
-blobs = storage_client.list_blobs(bucket_name, prefix=directory_name)
-
-# Load each file into BigQuery.
-for blob in blobs:
-    uri = f"gs://{bucket_name}/{blob.name}"
-    load_job = client.load_table_from_uri(uri, table_id, job_config=job_config)
-    load_job.result()
-    print(f"Loaded {load_job.output_rows} rows from {uri}")
+def load_listings(key, table, directory):
+    # BigQuery client
+    client = bigquery.Client.from_service_account_json(key)
+    table_id = table
+    job_config = bigquery.LoadJobConfig(
+        skip_leading_rows=1,
+        source_format=bigquery.SourceFormat.CSV,
+        field_delimiter=',',
+        quote_character='"',
+        allow_quoted_newlines=True,
+        encoding='UTF-8',
+        max_bad_records=0,
+        write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
+        ignore_unknown_values=True
+    )
+    
+    # Construct a Cloud Storage client object.
+    storage_client = storage.Client.from_service_account_json(key)
+    # Find airbnb project
+    buckets = storage_client.list_buckets()
+    for bucket in buckets:
+        if "project_airbnb" in bucket.name:
+            bucket_name = bucket.name
+            
+    directory_name = f'files/{directory}'
+    
+    # List all the files in the directory.
+    blobs = storage_client.list_blobs(bucket_name, prefix=directory_name)
+    
+    # Load each file into BigQuery.
+    for blob in blobs:
+        uri = f"gs://{bucket_name}/{blob.name}"
+        load_job = client.load_table_from_uri(uri, table_id, job_config=job_config)
+        load_job.result()
+        print(f"{load_job.output_rows} rows inserted from {blob.name}")
+    
+load_listings('./key.json', table, f'{path}/{quarter}')

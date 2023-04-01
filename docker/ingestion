@@ -1,0 +1,6 @@
+FROM python:3.10-slim-buster
+
+# Install Google Cloud libraries
+RUN pip install google-cloud-storage google-cloud-bigquery
+
+WORKDIR /app  

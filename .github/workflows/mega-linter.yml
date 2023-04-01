@@ -23,8 +23,6 @@ jobs:
   build:
     name: MegaLinter
     runs-on: ubuntu-latest
-    env:
-      MEGALINTER_EXCLUSIONS: 
     permissions: write-all
     steps:
       # Git Checkout
