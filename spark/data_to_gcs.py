@@ -2,7 +2,7 @@ from google.cloud import storage
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.functions import col
-    
+
 # Create a client to access the GCS bucket
 client = storage.Client.from_service_account_json("key.json")
 
@@ -24,7 +24,7 @@ spark = (
     .config("spark.driver.memory", "16g")
     .config("spark.sql.execution.arrow.enabled", "true")
     .config("spark.sql.csv.maxCharsPerColumn", "1000000")
-    .config("spark.sql.debug.maxToStringFields", "1000000") 
+    .config("spark.sql.debug.maxToStringFields", "1000000")
     .getOrCreate()
 )
 
