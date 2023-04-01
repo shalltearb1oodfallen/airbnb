@@ -1,6 +1,7 @@
 from google.cloud import storage
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
+from pyspark.sql.functions import col
 
 # Create a client to access the GCS bucket
 client = storage.Client.from_service_account_json("key.json")
@@ -22,12 +23,16 @@ spark = (
     .config("spark.executor.memory", "16g")
     .config("spark.driver.memory", "16g")
     .config("spark.sql.execution.arrow.enabled", "true")
+    .config("spark.sql.csv.maxCharsPerColumn", "1000000")
+    .config("spark.sql.debug.maxToStringFields", "1000000")
     .getOrCreate()
 )
 
 spark._jsc.hadoopConfiguration().set(
     "google.cloud.auth.service.account.json.keyfile", "key.json"
 )
+
+spark.conf.set("spark.sql.csv.maxCharsPerColumn", "1000000")
 
 # Define bucket names
 source_bucket = "airbnb_data_2022"
@@ -66,6 +71,7 @@ if backfill == "yes":
             .option("escape", '"')
             .load([f"gs://{source_bucket}/{file_name}" for file_name in listing_files])
             .withColumn("filename", F.input_file_name())
+            .withColumn("timestamp", F.current_timestamp())
         )
 
         non_listing_df = (
@@ -79,6 +85,7 @@ if backfill == "yes":
                 [f"gs://{source_bucket}/{file_name}" for file_name in non_listing_files]
             )
             .withColumn("filename", F.input_file_name())
+            .withColumn("timestamp", F.current_timestamp())
         )
 
         # Replace the string ""["...,..."]"" with "...,..."
@@ -98,6 +105,12 @@ if backfill == "yes":
                 for c, t in non_listing_df.dtypes
             ]
         )
+
+        if "source" in listing_df.columns:
+            listing_df = listing_df.drop(col("source"))
+
+        if "source" in non_listing_df.columns:
+            non_listing_df = non_listing_df.drop(col("source"))
 
         # Write the listing dataframe to the target bucket
         destination_path = f"gs://{target_bucket}/files/listings/{i}"
