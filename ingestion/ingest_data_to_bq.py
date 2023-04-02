@@ -33,6 +33,11 @@ def load_listings(key, table, directory):
         ignore_unknown_values=True,
     )
 
+    # Delete all rows from the table.
+    query = f"DELETE FROM {table_id} WHERE 1=1"
+    query_job = client.query(query)
+    query_job.result()
+
     # Construct a Cloud Storage client object.
     storage_client = storage.Client.from_service_account_json(key)
     # Find airbnb project

@@ -1,0 +1,19 @@
+FROM ubuntu:latest
+
+# Set the timezone to Europe/Amsterdam
+ENV TZ=Europe/Amsterdam
+
+# Install dependencies and set timezone
+RUN apt-get -y update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata python3-pip && \
+    ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata && \
+    pip install prefect
+
+WORKDIR /app
+
+ENV PREFECT_API_URL=http://host.docker.internal:4200/api
+
+EXPOSE 4200
+
+CMD ["prefect", "orion", "start", "--host", "0.0.0.0"]
