@@ -26,7 +26,7 @@ infrastructure:
 pipeline:
 	@echo "Execute the complete pipeline: loading data to gcs, to big query and run dbt"
 	# load data to gcs by using spark
-	#sudo docker run --rm -v $$(cat key.txt):/home/jovyan/key.json -v $$(pwd)/spark/data_to_gcs.py:/home/jovyan/data_to_gcs.py -e SPARK_HOME=/usr/local/spark -e PYSPARK_PYTHON=/opt/conda/bin/python spark /bin/bash -c "export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:$SPARK_HOME/python:$PYTHONPATH && python /home/jovyan/data_to_gcs.py"
+	sudo docker run --rm -v $$(cat key.txt):/home/jovyan/key.json -v $$(pwd)/spark/data_to_gcs.py:/home/jovyan/data_to_gcs.py -e SPARK_HOME=/usr/local/spark -e PYSPARK_PYTHON=/opt/conda/bin/python spark /bin/bash -c "export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:$SPARK_HOME/python:$PYTHONPATH && python /home/jovyan/data_to_gcs.py"
 	# load data to big query for March
 	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings mar
 	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long mar
