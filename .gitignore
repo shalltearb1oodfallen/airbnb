@@ -141,3 +141,12 @@ dmypy.json
 *.png
 *.zip
 *.csv
+
+# dbt
+/logs
+dbt.log  
+dbt.log.legacy
+dbt/dbt_project/target
+dbt/dbt_project/dbt_packages/dbt_utils/
+profiles.yml
+.user.yml

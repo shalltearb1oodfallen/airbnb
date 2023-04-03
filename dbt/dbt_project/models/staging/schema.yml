@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging
+    database: seismic-aloe-375119
+    schema: project_airbnb
+
+    tables:
+      - name: raw_listings

@@ -1,0 +1,9 @@
+FROM ubuntu:latest
+
+RUN apt-get -y update && \
+    apt-get -y install python3 pip && \
+    pip install dbt-bigquery
+
+WORKDIR /app
+
+CMD [ "sh", "-c", "export DBT_PROFILES_DIR=/app && cd /app/dbt_project && dbt deps && dbt run" ]

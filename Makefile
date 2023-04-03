@@ -8,34 +8,43 @@ default:
 
 infrastructure:
 	@echo "Building infrastructure"
-	sudo docker build -t terraform -f docker/infrastructure . && \
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./gcs_project.txt:/app/project_id.txt -v ./infrastructure/set_infrastructure.tf:/app/set_infrastructure.tf terraform;
+	#sudo docker build -t terraform -f docker/infrastructure . && \
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./gcs_project.txt:/app/project_id.txt -v ./infrastructure/set_infrastructure.tf:/app/set_infrastructure.tf terraform;
 	
 	# build spark container
-	sudo docker build -t spark -f docker/spark .
+	#sudo docker build -t spark -f docker/spark .
 
 	# build raw tables container
-	sudo docker build -t raw_tables -f docker/raw_tables .
+	#sudo docker build -t raw_tables -f docker/raw_tables .
 
 	# build ingestion container
-	sudo docker build -t ingestion -f docker/ingestion .
+	#sudo docker build -t ingestion -f docker/ingestion .
 
 	# create table on Big Query
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./gcs_project.txt:/app/gcs_project.txt -v ./infrastructure/raw_listings_long.sql:/app/raw_listings_long.sql -v ./infrastructure/raw_listings.sql:/app/raw_listings.sql -v ./infrastructure/tables_on_bigquery.py:/app/tables_on_bigquery.py raw_tables
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./gcs_project.txt:/app/gcs_project.txt -v ./infrastructure/raw_listings_long.sql:/app/raw_listings_long.sql -v ./infrastructure/raw_listings.sql:/app/raw_listings.sql -v ./infrastructure/tables_on_bigquery.py:/app/tables_on_bigquery.py raw_tables
 	
+	# create dbt container
+	sudo docker build -t dbt -f docker/dbt .
+
+	# create dbt profile file
+	sudo docker build -t dbt_profile -f docker/dbt_profile . 
+	sudo docker run --rm -it -v $$(cat key.txt):/app/key.json -v ./gcs_project.txt:/app/project_id.txt -v ./infrastructure/create_dbt_profile.py:/app/create_dbt_profile.py -v ./dbt:/file dbt_profile
+
 pipeline:
 	@echo "Execute the complete pipeline: loading data to gcs, to big query and run dbt"
 	# load data to gcs by using spark
-	sudo docker run --rm -v $$(cat key.txt):/home/jovyan/key.json -v $$(pwd)/spark/data_to_gcs.py:/home/jovyan/data_to_gcs.py -e SPARK_HOME=/usr/local/spark -e PYSPARK_PYTHON=/opt/conda/bin/python spark /bin/bash -c "export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:$SPARK_HOME/python:$PYTHONPATH && python /home/jovyan/data_to_gcs.py"
+	#sudo docker run --rm -v $$(cat key.txt):/home/jovyan/key.json -v $$(pwd)/spark/data_to_gcs.py:/home/jovyan/data_to_gcs.py -e SPARK_HOME=/usr/local/spark -e PYSPARK_PYTHON=/opt/conda/bin/python spark /bin/bash -c "export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:$SPARK_HOME/python:$PYTHONPATH && python /home/jovyan/data_to_gcs.py"
 	# load data to big query for March
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings mar
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long mar
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings mar
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long mar
 	# load data to big query for June
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings jun
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long jun
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings jun
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long jun
 	# load data to big query for September
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings sep
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long sep
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings sep
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long sep
 	# load data to big query for December
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings dec
-	sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long dec
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings dec
+	#sudo docker run --rm -v $$(cat key.txt):/app/key.json -v ./ingestion/ingest_data_to_bq.py:/app/ingest_data_to_bq.py -v ./gcs_project.txt:/app/project_id.txt ingestion python ingest_data_to_bq.py raw_listings_long dec
+	# run dbt
+	sudo docker run --rm -it -v ./dbt/:/app -v $$(cat key.txt):/app/key.json dbt && rm -f ./dbt/key.json
