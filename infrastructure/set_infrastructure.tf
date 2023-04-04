@@ -9,7 +9,7 @@ variable "project" {
 provider "google" {
   credentials = file(var.key)
   project     = file("${path.module}/${var.project}")
-  region      = "europe-west1"
+  region      = "US"
 }
 
 resource "random_id" "bucket_id" {
@@ -18,7 +18,7 @@ resource "random_id" "bucket_id" {
 
 resource "google_storage_bucket" "project_airbnb" {
   name          = "project_airbnb_${random_id.bucket_id.hex}"
-  location      = "europe-west1"
+  location      = "US"
   force_destroy = true
 }
 
@@ -26,5 +26,5 @@ resource "google_bigquery_dataset" "project_airbnb" {
   dataset_id    = "project_airbnb"
   friendly_name = "Project Airbnb"
   description   = "Dataset for Project Airbnb"
-  location      = "EU"
+  location      = "US"
 }

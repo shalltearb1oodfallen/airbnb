@@ -1,0 +1,114 @@
+version: 2
+
+sources:
+  - name: project_airbnb
+    tables:
+      - name: raw_listings
+        description: raw uncleand data
+        columns:
+          - name: id
+            tests:
+             - not_null 
+          - name: name
+          - name: host_id
+            tests:
+             - not_null   
+          - name: host_name
+          - name: neighbourhood_group
+          - name: neighbourhood
+          - name: latitude
+          - name: longitude
+          - name: room_type
+          - name: price
+          - name: minimum_nights
+          - name: number_of_reviews
+          - name: last_review
+          - name: reviews_per_month
+          - name: calculated_host_listings_count
+          - name: availability_365
+          - name: number_of_reviews_ltm
+          - name: license
+          - name: filename
+          - name: loaded_at
+
+      - name: raw_listings_long
+        description: raw uncleand extended data
+        columns:
+          - name: id
+            tests:
+             - not_null
+          - name: listing_url
+          - name: scrape_id
+          - name: last_scraped
+          - name: name
+          - name: description
+          - name: neighborhood_overview
+          - name: picture_url
+          - name: host_id
+          - name: host_url
+          - name: host_name
+          - name: host_since
+          - name: host_location
+          - name: host_about
+          - name: host_response_time
+          - name: host_response_rate
+          - name: host_acceptance_rate
+          - name: host_is_superhost
+          - name: host_thumbnail_url
+          - name: host_picture_url
+          - name: host_neighbourhood
+          - name: host_listings_count
+          - name: host_total_listings_count
+          - name: host_verifications
+          - name: host_has_profile_pic
+          - name: host_identity_verified
+          - name: neighbourhood
+          - name: neighbourhood_cleansed
+          - name: neighbourhood_group_cleansed
+          - name: latitude
+          - name: longitude
+          - name: property_type
+          - name: room_type
+          - name: accommodates
+          - name: bathrooms
+          - name: bathrooms_text
+          - name: bedrooms
+          - name: beds
+          - name: amenities
+          - name: price
+          - name: minimum_nights
+          - name: maximum_nights
+          - name: minimum_minimum_nights
+          - name: maximum_minimum_nights
+          - name: minimum_maximum_nights
+          - name: maximum_maximum_nights
+          - name: minimum_nights_avg_ntm
+          - name: maximum_nights_avg_ntm
+          - name: calendar_updated
+          - name: has_availability
+          - name: availability_30
+          - name: availability_60
+          - name: availability_90
+          - name: availability_365
+          - name: calendar_last_scraped
+          - name: number_of_reviews
+          - name: number_of_reviews_ltm
+          - name: number_of_reviews_l30d
+          - name: first_review
+          - name: last_review
+          - name: review_scores_rating
+          - name: review_scores_accuracy
+          - name: review_scores_cleanliness
+          - name: review_scores_checkin
+          - name: review_scores_communication
+          - name: review_scores_location
+          - name: review_scores_value
+          - name: license
+          - name: instant_bookable
+          - name: calculated_host_listings_count
+          - name: calculated_host_listings_count_entire_homes
+          - name: calculated_host_listings_count_private_rooms
+          - name: calculated_host_listings_count_shared_rooms
+          - name: reviews_per_month
+          - name: filename
+          - name: loaded_at
