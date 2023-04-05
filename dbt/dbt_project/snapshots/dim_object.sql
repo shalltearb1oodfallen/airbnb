@@ -9,7 +9,7 @@
                   , 'description'
                   , 'neighbourhood_group'
                   , 'neighbourhood'
-                  , 'neighborhood_overview'
+                  , 'neighbourhood_overview'
                   , 'latituide'
                   , 'longitude'
                   , 'property_type'
@@ -36,7 +36,7 @@ with dim_obj as (
         , description
         , neighbourhood_group
         , neighbourhood
-        , neighborhood_overview
+        , neighbourhood_overview
         , latituide
         , longitude
         , property_type

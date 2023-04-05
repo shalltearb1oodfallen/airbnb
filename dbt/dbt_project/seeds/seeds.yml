@@ -1,0 +1,16 @@
+version: 2
+
+seeds:
+  - name: country_data
+    description: list of cities/areas, countries, exchange rate to the Euro and latitude and longitude
+    columns:
+      - name: place
+        description: Name of the city or area
+      - name: country
+        description: country name
+      - name: exchange_rate
+        description: exchange rate local currency to Euro
+      - name: latitude
+        description: latitude of the city or area
+      - name: longitude
+        description: longitude of the city or area
