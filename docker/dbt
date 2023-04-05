@@ -6,4 +6,4 @@ RUN apt-get -y update && \
 
 WORKDIR /app
 
-CMD [ "sh", "-c", "export DBT_PROFILES_DIR=/app && cd /app/dbt_project && dbt deps && dbt run -m raw_cleaned && dbt snapshot && dbt run -m path:models/fact" ]
+CMD [ "sh", "-c", "export DBT_PROFILES_DIR=/app && cd /app/dbt_project && dbt deps && dbt run -m raw_cleaned && dbt seed && dbt snapshot && dbt run -m path:models/fact && dbt run -m path:models/views"]

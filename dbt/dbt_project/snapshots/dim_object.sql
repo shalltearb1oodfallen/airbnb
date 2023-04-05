@@ -25,7 +25,7 @@
                   , 'place'
                   , 'loaded_at'
                 ]
-        )
+  )
 }}
 
 with dim_obj as (

@@ -2,7 +2,12 @@
     config(
           materialized = 'incremental'
         , tags = ['fact', 'airbnb']
-    )
+        , partition_by = {
+                "field": "quarter",
+                "data_type": "string"
+              }
+        , cluster_by = ["place", "country"]
+        )
 }}
 
 with source as (select id
@@ -21,9 +26,21 @@ with source as (select id
             , review_scores_communication
             , review_scores_location
             , review_scores_value
-            , place
+            , case
+                when place = 'Buenos_Aires' then 'Buenos Aires'
+                when place = 'Cape-Town' then 'Cape Town'
+                when place = 'Los-Angeles' then 'Los Angeles'
+                when place = 'Mexico-City' then 'Mexico City'
+                when place = 'New-Orleans' then 'New Orleans'
+                when place = 'New-York' then 'New York'
+                when place = 'Rhode-Island' then 'Rhode Island'
+                when place = 'San-Diego' then 'San Diego'
+                when place = 'San-Francisco' then 'San Francisco'
+                when place = 'Washington' then 'Washington DC'
+                else place 
+              end as place
             , quarter
-            , loaded_at
+            , current_timestamp() as loaded_at
             , {{ dbt_utils.generate_surrogate_key(['id','airbnb_id','host_response_rate','host_acceptance_rate',
                                                    'number_of_reviews','reviews_per_month','calculated_host_listings_count',
                                                    'availability_365','number_of_reviews_ltm','review_scores_rating',

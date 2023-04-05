@@ -150,3 +150,4 @@ dbt/dbt_project/target
 dbt/dbt_project/dbt_packages/dbt_utils/
 profiles.yml
 .user.yml
+!country_data.csv
