@@ -8,11 +8,11 @@ sources:
         columns:
           - name: id
             tests:
-             - not_null 
+              - not_null
           - name: name
           - name: host_id
             tests:
-             - not_null   
+              - not_null
           - name: host_name
           - name: neighbourhood_group
           - name: neighbourhood
@@ -36,7 +36,7 @@ sources:
         columns:
           - name: id
             tests:
-             - not_null
+              - not_null
           - name: listing_url
           - name: scrape_id
           - name: last_scraped

@@ -1,6 +1,6 @@
 import yaml
 
-with open('/app/project_id.txt', "r") as f:
+with open("/app/project_id.txt", "r") as f:
     id = f.read()
 
 data = {
@@ -15,10 +15,10 @@ data = {
                 "priority": "interactive",
                 "project": id,
                 "threads": 4,
-                "type": "bigquery"
+                "type": "bigquery",
             }
         },
-        "target": "dev"
+        "target": "dev",
     }
 }
 

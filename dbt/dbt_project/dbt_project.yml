@@ -1,10 +1,9 @@
-
-name: 'dbt_project'
-version: '1.0.0'
+name: "dbt_project"
+version: "1.0.0"
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'dbt_project'
+profile: "dbt_project"
 
 # These configurations specify where dbt should look for different types of files.
 model-paths: ["models"]
@@ -14,11 +13,10 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
+target-path: "target" # directory which will store compiled SQL files
+clean-targets: # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
-
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -29,11 +27,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   dbt_project:
     # Config indicated by + and applies to all files under models/example/
-    
-seeds:
-  description: 'A description of the country_data seed.'
-  root_path: '/app/dbt_project/seeds/'
-  delimiter: ','
-  header_row: true
 
-    
+seeds:
+  description: "A description of the country_data seed."
+  root_path: "/app/dbt_project/seeds/"
+  delimiter: ","
+  header_row: true
