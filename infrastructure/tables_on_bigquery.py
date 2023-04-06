@@ -1,16 +1,16 @@
 from google.cloud import bigquery
 
 with open("gcs_project.txt", "r") as f:
-        id = f.read()
+    id = f.read()
 
 with open("raw_listings.sql", "r") as f:
-        create_table_command = f.read()
+    create_table_command = f.read()
 
 with open("raw_listings_long.sql", "r") as f:
-        create_table_command_long = f.read()
+    create_table_command_long = f.read()
+
 
 def create_table(key, id, sql_file):
-      
     # Create BigQuery client object
     client = bigquery.Client.from_service_account_json(key, project=id)
 
