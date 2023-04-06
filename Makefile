@@ -6,6 +6,11 @@ SHELL = /bin/bash -x
 default:
 	# nothing happens. Choose infrastructure to set up gcs and big query
 
+keys:
+	@echo "Create file with the path and name of the connection file to gcp. Further, the individual project id"
+	echo "/home/shalltear/.ssh/seismic-aloe-375119-2472ead814ee.json" > key.txt
+	echo "seismic-aloe-375119" > gcs_project.txt
+
 infrastructure:
 	@echo "Building infrastructure"
 	sudo docker build -t terraform -f docker/infrastructure . && \
