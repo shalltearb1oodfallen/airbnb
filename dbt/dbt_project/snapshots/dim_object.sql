@@ -23,7 +23,6 @@
                   , 'first_review'
                   , 'last_review'
                   , 'place'
-                  , 'loaded_at'
                 ]
   )
 }}
