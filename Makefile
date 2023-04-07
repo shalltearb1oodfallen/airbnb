@@ -6,15 +6,6 @@ SHELL = /bin/bash -x
 default:
 	# nothing happens. Choose infrastructure to set up gcs and big query
 
-key:
-	@echo "create keys"
-	echo "/home/shalltear/.ssh/seismic-aloe-375119-2472ead814ee.json" > key.txt
-	echo "seismic-aloe-375119" > gcs_project.txt
-
-docker:
-	@echo "update docker to newest version"
-	sh .docker/update_docker.sh
-
 infrastructure:
 	@echo "Building infrastructure"
 	sudo docker build -t terraform -f docker/infrastructure . && \

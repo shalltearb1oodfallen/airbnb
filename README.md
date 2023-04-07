@@ -49,13 +49,13 @@ This project can be replicated on Linux, macOS and Windows. However, it requires
   * Create and download [service account key](https://cloud.google.com/iam/docs/keys-create-delete)
   * provide this key and project id (see execution)
   * [make](https://www.gnu.org/software/make/) (on Debian/Ubuntu it can be installed by `apt-get install make`)
-  * docker > 20.10.17 (doesn't work with this docker version, which is default in snap. Tested with docker 23.0.3. For Debian/Ubuntu I provide a shell script, for others have a look at [docker](https://docs.docker.com/engine/install/)
-  * If you're using a VM, it was tested on gcp VM, e2-standard-4, x86/64 architecture, 30 GB disk space using Debian-11-bullseye
+  * docker > 20.10.17 (doesn't work with this docker version, which is default in snap. Tested with docker 23.0.3. Have look at [docker](https://docs.docker.com/engine/install/) for your OS
+  * If you're using a VM, don't make it too small. Process was tested on gcp VM, e2-standard-4, x86/64 architecture, 30 GB disk space using Debian-11-bullseye and Ubuntu 22.04 LTS
     
 <a id="item-six"></a>
 ## Execution
  * clone this repository
- * within this repository two .txt-files are provided `key.txt` and `gcs_project.txt` Store the path and name of your file into the first file. Make sure, not spaces or lines exist. In the second file set the id of your project. Both files contain an example. Alternatively, open `Makefile` and change the entries in line 11 (path and file name) and 12 (project). Execute it afterwards by using `make key`
+ * within this repository two .txt-files are provided `key.txt` and `gcs_project.txt` Store the path and name of your file into the first file. Make sure, not spaces or lines exist. In the second file set the id of your project. Both files contain an example.
  * To update docker on Debian/Ubuntu execute `make docker`
  * The first two points are optional. To build now the infrastructure execute `make infrastructure`
  * The last step requires the most time, since a lot of data is transfered two times from gcs to gcs to Big Query. In addition dbt is executed for every loop to provide slowly changing dimension tables. Execute it with `make pipeline`
