@@ -5,6 +5,8 @@
  * [Used tools](#item-two)
  * [Pipeline](#item-three)
  * [Replication](#item-four)
+ * [Requirements](#item-five)
+ * [Execution](#item-six)
  
 <!-- headings -->
 <a id="item-one"></a>
@@ -26,7 +28,7 @@ Airbnb dataset as of 2022. Purpose is to get some insights and comparisons about
  
 <a id="item-three"></a>
 ## Pipeline
-![Architecture](/docu/graphic/architecture.png)
+![Architecture](/graphic/architecture.png)
 
 A makefile executes a terraform script, which creates an gcs bucket with a random number, because every bucket must be unique. After that, a database is implemented in biq query and raw tables added. For this two sql-files, stored in *infrastructure* are executed. Following that, a container creates the dbt environment, including needed dbt profile.
 Next step is then fetching data. Originally coming from [insideairbnb](http://insideairbnb.com), it is now also stored within a [gcs bucket](https://storage.googleapis.com/airbnb_data_2022/), since this data is only provide on a quarterly basis for the last 12 months, so recreation would otherwise impossible on a later point of time. Therefore, using spark is actually not necessary, copying directly from gcs to gcs would be possible. However, to simulate a more realistic scenario, spark is used to fetch and copy the data into an own gcs bucket, which serves as data lake. From there a short python script ingest the data into Big Query, used as data warehouse.
@@ -50,7 +52,7 @@ This project can be replicated on Linux, macOS and Windows. However, it requires
   * docker > 20.10.17 (doesn't work with this docker version, which is default in snap. Tested with docker 23.0.3. For Debian/Ubuntu I provide a shell script, for others have a look at [docker](https://docs.docker.com/engine/install/)
   * If you're using a VM, it was tested on gcp VM, e2-standard-4, x86/64 architecture, 30 GB disk space using Debian-11-bullseye
     
-<a id="item-five"></a>
+<a id="item-six"></a>
 ## Execution
  * clone this repository
  * within this repository two .txt-files are provided `key.txt` and `gcs_project.txt` Store the path and name of your file into the first file. Make sure, not spaces or lines exist. In the second file set the id of your project. Both files contain an example. Alternatively, open `Makefile` and change the entries in line 11 (path and file name) and 12 (project). Execute it afterwards by using `make key`
