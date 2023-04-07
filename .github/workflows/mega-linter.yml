@@ -7,7 +7,7 @@ on:
   # Trigger mega-linter at every push. Action will also be visible from Pull Requests to main
   #push: # Comment this line to trigger action only on pull-requests (not recommended if you don't pay for GH Actions)
   pull_request:
-    branches: [master, dev]
+    branches: [master]
 
 env: # Comment env block if you do not want to apply fixes
   # Apply linter fixes configuration
@@ -44,8 +44,8 @@ jobs:
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }} # Validates all source when push on main, else just the git diff with main. Override with true if you always want to lint all sources
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
-          DISABLE: COPYPASTE,SPELL,REPOSITORY,MAKEFILE_CHECKMAKE,PYTHON_PYRIGHT,PYTHON_PYLINT,TERRAFORM_KICS,TERRAFORM_CHECKOV,TERRAFORM_TERRASCAN,SQL_SQL_LINT,SQL_TSQLLINT
-          DISABLE_LINTERS: COPYPASTE,SPELL,REPOSITORY,MAKEFILE_CHECKMAKE,PYTHON_PYRIGHT,PYTHON_PYLINT,TERRAFORM_KICS,TERRAFORM_CHECKOV,TERRAFORM_TERRASCAN,SQL_SQL_LINT,SQL_TSQLLINT,PYTHON_BANDIT
+          DISABLE: COPYPASTE,SPELL,REPOSITORY,MAKEFILE_CHECKMAKE,PYTHON_PYRIGHT,PYTHON_PYLINT,TERRAFORM_KICS,TERRAFORM_CHECKOV,TERRAFORM_TERRASCAN,SQL_SQL_LINT,SQL_TSQLLINT,MARKDOWN_MARKDOWNLINT,BASH_SHELLCHECK,MARKDOWN_MARKDOWN_LINK_CHECK
+          DISABLE_LINTERS: COPYPASTE,SPELL,REPOSITORY,MAKEFILE_CHECKMAKE,PYTHON_PYRIGHT,PYTHON_PYLINT,TERRAFORM_KICS,TERRAFORM_CHECKOV,TERRAFORM_TERRASCAN,SQL_SQL_LINT,SQL_TSQLLINT,PYTHON_BANDIT,MARKDOWN_MARKDOWNLINT,BASH_SHELLCHECK,MARKDOWN_MARKDOWN_LINK_CHECK
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
