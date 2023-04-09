@@ -152,3 +152,6 @@ profiles.yml
 .user.yml
 !country_data.csv
 !architecture.png
+!dbt.png
+!places.png
+!basic.png
