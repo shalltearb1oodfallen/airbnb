@@ -7,7 +7,7 @@
  * [Replication](#item-four)
  * [Requirements](#item-five)
  * [Execution](#item-six)
- * [Execution](#item-seven)
+ * [How does it work?](#item-seven)
 
 <!-- headings -->
 <a id="item-one"></a>
@@ -44,6 +44,7 @@ Within Big Query two raw tables contains raw data. Before raw data is ingested, 
 
 For understanding, since fresh data is only provided every three months, the makefile is used to execute the complete pipeline and loops over the available datasets. That means, the makefile itself is the orchestration file, since it makes sure, every step is executed only after the step before is finished. Therefore, a "real" orchestration tool is not implemented (however, prefect is provided as docker, but no files added, since it is simply not needed).
 
+dbt lineage: 
 ![dbt lineage](/graphic/dbt.png)
 
 <a id="item-four"></a>
